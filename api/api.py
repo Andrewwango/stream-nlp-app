@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from nlp import Client
+from .nlp import Client
 
 app = FastAPI()
 client = Client()

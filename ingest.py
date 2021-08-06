@@ -1,6 +1,6 @@
 import sys, sqlite3
 import pandas as pd
-import analytics
+import analytics.analytics as analytics
 
 if len(sys.argv) != 2:
     print("Usage: python main.py <filename>")
@@ -9,17 +9,14 @@ if len(sys.argv) != 2:
 fn = sys.argv[1]
 f = open(fn, "r")
 text_raw = f.read()
-text_list, punctuation_positions = analytics.text_to_list(text_raw)
 f.close()
 
 #Raw sentiment
 overall_sentiment = analytics.detect_sentiment(text_raw)
 
 #Chunk sentiment
+text_list, punctuation_positions = analytics.text_to_list(text_raw)
 chunk_sentiments = [analytics.detect_sentiment(text_chunk)["code"] for text_chunk in text_list]
-
-#Output data (TODO: eventually to SQL)
-#pd.DataFrame({"Sentiment": chunk_sentiments, "Position": punctuation_positions}).to_csv(fn + "_results.csv")
 
 conn = sqlite3.connect('database/analytics_results.db')
 cur = conn.cursor()
