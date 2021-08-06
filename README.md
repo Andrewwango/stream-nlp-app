@@ -6,7 +6,7 @@
 - Live visualisation with Plotly Dash dashboard.
 
 Installation:
-`pip install pandas uvicorn transformers fastapi dash`
+`pip install pandas requests uvicorn transformers fastapi dash`
 
 Get started:
 1. Start API: `uvicorn api.api:app --reload`
